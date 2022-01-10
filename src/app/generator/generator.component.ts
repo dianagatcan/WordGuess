@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { DictionaryService } from '../dictionary.service';
+
 
 @Component({
   selector: 'app-generator',
   templateUrl: './generator.component.html',
   styleUrls: ['./generator.component.css']
 })
-
 export class GeneratorComponent implements OnInit {
-dictionary: Array<string> = [];
+
+// dictionary: Array<string> = [];
+
 letters: string = "";
 
-//Set a timer
+//Set timer
 timer: any = 5;
 myInterval: any = setInterval(()=>{
   this.timer= this.timer -1; 
@@ -20,29 +23,22 @@ myInterval: any = setInterval(()=>{
   }
 }, 1000);
 
-  constructor() { }
+  constructor(private dictionaryService: DictionaryService) { }
 
   ngOnInit(): void {
-    this.fillDictionary().then(() => {
-      this.selectLetters();
-      this.myInterval;
-    })
-    
+    this.getDictionary();
+    this.selectLetters()
+    //   this.myInterval;
+
   }
 
-  //Read and split words in dictionary
-  async fillDictionary(): Promise<void> {
-    return fetch('assets/dictionary.txt')
-    .then(response => response.text())
-    .then(data => {
-      this.dictionary = data.split(/\r?\n/);
-    })
+  getDictionary(): Array<string> {
+    return this.dictionaryService.getDictionary();
   }
 
-
-  //Select 3 letters from a random word
+  //Select 3 letters from dictionary
   selectLetters(): void {
-    const randomWord = this.dictionary[Math.floor(Math.random()*this.dictionary.length)];
+    const randomWord = this.getDictionary()[Math.floor(Math.random()*this.getDictionary.length)];
     const randomWordLength = randomWord.length;
     const start = randomWordLength - 3;
     const selectStart = Math.floor(Math.random()*start) +1;
@@ -50,6 +46,4 @@ myInterval: any = setInterval(()=>{
     const selectSintagm = randomWord.slice(selectStart, selectStop)
     this.letters = selectSintagm;
   }
-
-
 }

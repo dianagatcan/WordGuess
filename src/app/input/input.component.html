@@ -1,4 +1,4 @@
 <div>
     <h2>{{word}}</h2>
-    <input (keydown.enter)="onKeydown()" id="solution" type="text" placeholder="Type the solution" [(ngModel)]="word" required>
+    <input #solution (keydown.enter)="onKeydown(solution.value)" id="solution" type="text" placeholder="Type the solution" [(ngModel)]="word" required>
 </div>

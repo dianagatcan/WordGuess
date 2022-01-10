@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { GeneratorComponent } from './generator/generator.component';
 import { InputComponent } from './input/input.component';
 import { FormsModule } from '@angular/forms';
-
 @NgModule({
   declarations: [
     AppComponent,

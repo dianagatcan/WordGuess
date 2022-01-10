@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DictionaryService } from '../dictionary.service';
+
 
 @Component({
   selector: 'app-input',
@@ -6,16 +8,20 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./input.component.css']
 })
 export class InputComponent implements OnInit {
-  @Input() dictionary: Array<string> = [];
 
   word: string = "";
 
-  constructor() { }
+  constructor(private dictionaryService: DictionaryService) { }
 
   ngOnInit(): void {
   }
 
-  onKeydown() {
+  onKeydown(solution: string) {
+   if(this.dictionaryService.getDictionary().indexOf(solution)>=0){
+     console.log("true")
+   } else {
+     console.log("false")
+   }
   }
    
 }
