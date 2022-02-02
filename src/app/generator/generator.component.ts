@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { DictionaryService } from '../dictionary.service';
-
 
 @Component({
   selector: 'app-generator',
@@ -9,9 +8,9 @@ import { DictionaryService } from '../dictionary.service';
 })
 export class GeneratorComponent implements OnInit {
 
-// dictionary: Array<string> = [];
-
 letters: string = "";
+input: string ="";
+message:string = '';
 
 //Set timer
 timer: any = 5;
@@ -19,16 +18,18 @@ myInterval: any = setInterval(()=>{
   this.timer= this.timer -1; 
   if(this.timer < 0){
     clearInterval(this.myInterval);
-    this.timer="Time out"
+    this.timer='Time out'
   }
 }, 1000);
 
   constructor(private dictionaryService: DictionaryService) { }
 
+
+  
   ngOnInit(): void {
     this.getDictionary();
-    this.selectLetters()
-    //   this.myInterval;
+    this.selectLetters();
+    this.timer;
 
   }
 
@@ -38,7 +39,7 @@ myInterval: any = setInterval(()=>{
 
   //Select 3 letters from dictionary
   selectLetters(): void {
-    const randomWord = this.getDictionary()[Math.floor(Math.random()*this.getDictionary.length)];
+    const randomWord = this.getDictionary()[Math.floor(Math.random()*this.getDictionary().length)];
     const randomWordLength = randomWord.length;
     const start = randomWordLength - 3;
     const selectStart = Math.floor(Math.random()*start) +1;
@@ -46,4 +47,33 @@ myInterval: any = setInterval(()=>{
     const selectSintagm = randomWord.slice(selectStart, selectStop)
     this.letters = selectSintagm;
   }
+
+  addInput(newInput:string){
+    this.input = newInput;
+    this.checkSolution();
+
+  }
+
+  checkSolution():void{
+    if(this.getDictionary().indexOf(this.input)>=0 && this.timer>=0 && this.input.includes(this.letters)){
+      this.selectLetters();
+      this.timer = 30;
+      this.message = ''; 
+    } else if(this.timer=0){
+      
+      }
+    // } else if(this.getDictionary().indexOf(this.input)<0 || !this.input.includes(this.letters) && this.timer>=0 ) {
+    //   this.message = "Try again"
+    // } else if(this.timer=0) {
+    //   this.message = 'You lost'
+    // }
+
+  }
+
+  restart() {
+    this.ngOnInit();
+    this.timer=30;
+    this.message = '';
+  }
 }
+

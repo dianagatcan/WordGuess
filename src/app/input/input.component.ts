@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DictionaryService } from '../dictionary.service';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+// import { DictionaryService } from '../dictionary.service';
 
 
 @Component({
@@ -8,20 +8,18 @@ import { DictionaryService } from '../dictionary.service';
   styleUrls: ['./input.component.css']
 })
 export class InputComponent implements OnInit {
-
   word: string = "";
 
-  constructor(private dictionaryService: DictionaryService) { }
+  @Output() newInput = new EventEmitter<string>();
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
-  onKeydown(solution: string) {
-   if(this.dictionaryService.getDictionary().indexOf(solution)>=0){
-     console.log("true")
-   } else {
-     console.log("false")
-   }
+  ngOnInit(): void {}
+
+
+  sendInput(value: string){
+    this.newInput.emit(value);
+    this.word = '';
   }
    
 }
