@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnChanges} from '@angular/core';
 import { DictionaryService } from '../dictionary.service';
 
 @Component({
@@ -16,22 +16,22 @@ message:string = '';
 timer: any = 5;
 myInterval: any = setInterval(()=>{
   this.timer= this.timer -1; 
-  if(this.timer < 0){
+  if(this.timer < 1){
     clearInterval(this.myInterval);
-    this.timer='Time out'
+    this.message = "You lost"
+    this.timer = "Time out"
   }
 }, 1000);
 
   constructor(private dictionaryService: DictionaryService) { }
 
-
   
   ngOnInit(): void {
     this.getDictionary();
     this.selectLetters();
-    this.timer;
-
   }
+
+  
 
   getDictionary(): Array<string> {
     return this.dictionaryService.getDictionary();
@@ -57,23 +57,20 @@ myInterval: any = setInterval(()=>{
   checkSolution():void{
     if(this.getDictionary().indexOf(this.input)>=0 && this.timer>=0 && this.input.includes(this.letters)){
       this.selectLetters();
-      this.timer = 30;
+      this.timer = 5;
       this.message = ''; 
-    } else if(this.timer=0){
-      
-      }
-    // } else if(this.getDictionary().indexOf(this.input)<0 || !this.input.includes(this.letters) && this.timer>=0 ) {
-    //   this.message = "Try again"
-    // } else if(this.timer=0) {
-    //   this.message = 'You lost'
-    // }
-
+    } else if(this.getDictionary().indexOf(this.input)<0 || !this.input.includes(this.letters) && this.timer>=0 ) {
+      // this.message = "Try again"
+    } 
   }
+
+
 
   restart() {
     this.ngOnInit();
-    this.timer=30;
+    this.timer=5;
     this.message = '';
   }
+
 }
 
