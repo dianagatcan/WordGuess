@@ -1,5 +1,5 @@
 <div>
     <h2 class="solutionValue">{{word}}</h2>
-    <input #solution (keydown.enter)="sendInput(solution.value)" id="solution" type="text" placeholder="Type the solution" [(ngModel)]="word" required>
+    <input [disabled]=status #solution (keydown.enter)="sendInput(solution.value)" id="solution" type="text" placeholder="Type the solution" [(ngModel)]="word" required>
 </div>
 

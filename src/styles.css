@@ -22,9 +22,15 @@ body {
 }
 
 /* ------------------------------- */
+.count {
+  position: absolute;
+  opacity: 0.5;
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 25px;
+}
+
 .conditions {
   height: 400px;
-  /* background-color: cadetblue; */
 }
 
 .letters {
@@ -38,26 +44,12 @@ body {
 .timer {
   font-family: "Big Shoulders Display", cursive;
   font-size: 50px;
-
-  /* display: block;
-  height: 60px;
-  width: 60px;
-  line-height: 60px;
-
-  -moz-border-radius: 30px;
-  border-radius: 30px; 
-
-  background-color: black;
-  color: white;
-  text-align: center;
-  font-size: 2em; */
 }
 
 /* ------------------------------- */
 
 .inputSolution {
   height: 300px;
-  /* background-color: blueviolet; */
 }
 
 input {
@@ -98,27 +90,7 @@ button {
   cursor: pointer;
 }
 
-.shake {
-  animation: 0.8s shake infinite alternate;
-}
-
-@keyframes shake {
-  0% {
-    transform: skewX(-15deg);
-  }
-  5% {
-    transform: skewX(15deg);
-  }
-  10% {
-    transform: skewX(-15deg);
-  }
-  15% {
-    transform: skewX(15deg);
-  }
-  20% {
-    transform: skewX(0deg);
-  }
-  100% {
-    transform: skewX(0deg);
-  }
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }

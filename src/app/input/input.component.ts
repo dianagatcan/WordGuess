@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
 // import { DictionaryService } from '../dictionary.service';
 
 
@@ -9,6 +9,7 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 })
 export class InputComponent implements OnInit {
   word: string = "";
+  @Input() status: boolean = false;
 
   @Output() newInput = new EventEmitter<string>();
 

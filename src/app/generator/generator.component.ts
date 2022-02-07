@@ -11,17 +11,23 @@ export class GeneratorComponent implements OnInit {
 letters: string = "";
 input: string ="";
 message:string = '';
+disabled: boolean = false
+winCount: number = 0;
 
 //Set timer
-timer: any = 5;
-myInterval: any = setInterval(()=>{
-  this.timer= this.timer -1; 
-  if(this.timer < 1){
-    clearInterval(this.myInterval);
-    this.message = "You lost"
-    this.timer = "Time out"
-  }
-}, 1000);
+timer: number = 5;
+myInterval: any = this.startInterval()
+startInterval(){
+  return setInterval(()=>{
+    this.timer= this.timer -1; 
+    if(this.timer < 1){
+      clearInterval(this.myInterval);
+      if(this.timer <= 0){
+        this.disabled = true;
+      }
+    }
+  }, 1000);
+}
 
   constructor(private dictionaryService: DictionaryService) { }
 
@@ -58,18 +64,21 @@ myInterval: any = setInterval(()=>{
     if(this.getDictionary().indexOf(this.input)>=0 && this.timer>=0 && this.input.includes(this.letters)){
       this.selectLetters();
       this.timer = 5;
-      this.message = ''; 
+      this.winCount++
     } else if(this.getDictionary().indexOf(this.input)<0 || !this.input.includes(this.letters) && this.timer>=0 ) {
       // this.message = "Try again"
+
     } 
   }
-
-
 
   restart() {
     this.ngOnInit();
     this.timer=5;
+    this.input='';
     this.message = '';
+    this.disabled = false;
+    this.myInterval;
+    this.winCount =0;
   }
 
 }

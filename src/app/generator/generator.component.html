@@ -1,12 +1,13 @@
 <div class="container">
+    <h1 class='count'>You guessed {{winCount}} words</h1>
     <div class="conditions align">
         <h1 class="letters">{{letters}}</h1>    
         <h1 class="message">{{message}}</h1>
-        <h1 class="timer">{{timer}}</h1>
+        <h1 class="timer">{{timer<=0?"Time out":timer}}</h1>
 
     </div>
-    <div class="inputSolution align">
-        <app-input (newInput)="addInput($event)"></app-input>
+    <div class="inputSolution align" >
+        <app-input [status]=disabled  (newInput)="addInput($event)"></app-input>
         <button (click)="restart()">Play again</button>
     </div>
 
