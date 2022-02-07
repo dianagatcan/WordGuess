@@ -15,7 +15,7 @@ disabled: boolean = false
 winCount: number = 0;
 
 //Set timer
-timer: number = 5;
+timer: number = 30;
 myInterval: any = this.startInterval()
 startInterval(){
   return setInterval(()=>{
@@ -63,7 +63,7 @@ startInterval(){
   checkSolution():void{
     if(this.getDictionary().indexOf(this.input)>=0 && this.timer>=0 && this.input.includes(this.letters)){
       this.selectLetters();
-      this.timer = 5;
+      this.timer = 30;
       this.winCount++
     } else if(this.getDictionary().indexOf(this.input)<0 || !this.input.includes(this.letters) && this.timer>=0 ) {
       // this.message = "Try again"
@@ -73,7 +73,7 @@ startInterval(){
 
   restart() {
     this.ngOnInit();
-    this.timer=5;
+    this.timer=30;
     this.input='';
     this.message = '';
     this.disabled = false;
