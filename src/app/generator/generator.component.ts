@@ -35,6 +35,7 @@ startInterval(){
   ngOnInit(): void {
     this.getDictionary();
     this.selectLetters();
+    this.myInterval;
   }
 
   
@@ -65,19 +66,19 @@ startInterval(){
       this.selectLetters();
       this.timer = 30;
       this.winCount++
-    } else if(this.getDictionary().indexOf(this.input)<0 || !this.input.includes(this.letters) && this.timer>=0 ) {
-      // this.message = "Try again"
+    // } else if(this.getDictionary().indexOf(this.input)<0 || !this.input.includes(this.letters) && this.timer>=0 ) {
+    //   this.message = "Try again"
 
-    } 
+    // } 
+    }
   }
 
   restart() {
-    this.ngOnInit();
+    // this.ngOnInit();
     this.timer=30;
     this.input='';
     this.message = '';
     this.disabled = false;
-    this.myInterval;
     this.winCount =0;
   }
 
